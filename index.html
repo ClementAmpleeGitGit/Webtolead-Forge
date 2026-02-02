@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+
+  <!-- Optionnel : police "clean" (si tu veux coller au site, remplace par la font Forgeblast) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <title>Forgeblast — Demo Web-to-Lead</title>
+
+  <style>
+    :root{
+      /* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+         A ADAPTER POUR COLLER A LA CHARTE FORGEBLAST
+         Remplace juste ces valeurs (couleurs / radius / font).
+      <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< */
+      --bg: #0b1020;                 /* fond */
+      --surface: rgba(255,255,255,.06); /* carte */
+      --surface-2: rgba(255,255,255,.10);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.70);
+      --border: rgba(255,255,255,.14);
+
+      --primary: #7c3aed;            /* couleur principale (bouton) */
+      --primary-2: #22d3ee;          /* accent secondaire (focus/halo) */
+
+      --radius: 16px;
+      --font: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    body{
+      margin: 0;
+      font-family: var(--font);
+      color: var(--text);
+      background:
+        radial-gradient(900px 600px at 15% 20%, rgba(124,58,237,.35), transparent 60%),
+        radial-gradient(900px 600px at 80% 70%, rgba(34,211,238,.25), transparent 55%),
+        var(--bg);
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 28px 16px;
+    }
+
+    .wrap{
+      width: 100%;
+      max-width: 780px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .card{
+      background: linear-gradient(180deg, var(--surface), rgba(255,255,255,.03));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: 0 18px 60px rgba(0,0,0,.45);
+      overflow: hidden;
+    }
+
+    .header{
+      padding: 22px 22px 12px 22px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      background: linear-gradient(90deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+    }
+
+    .kicker{
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 6px 0;
+    }
+
+    h1{
+      font-size: 20px;
+      margin: 0 0 6px 0;
+      font-weight: 600;
+      line-height: 1.25;
+    }
+
+    .sub{
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    form{
+      padding: 18px 22px 22px 22px;
+    }
+
+    .grid{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    @media (max-width: 720px){
+      .grid{ grid-template-columns: 1fr; }
+      .header, form{ padding-left: 16px; padding-right: 16px; }
+    }
+
+    .field{
+      display: grid;
+      gap: 6px;
+    }
+
+    label{
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    input[type="text"], input[type="email"], input[type="tel"]{
+      width: 100%;
+      padding: 12px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.25);
+      color: var(--text);
+      outline: none;
+      transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+
+    input::placeholder{ color: rgba(255,255,255,.45); }
+
+    input:focus{
+      border-color: rgba(34,211,238,.55);
+      box-shadow: 0 0 0 4px rgba(34,211,238,.18);
+      background: rgba(0,0,0,.34);
+    }
+
+    .actions{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,.10);
+    }
+
+    .hint{
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    button{
+      border: 0;
+      cursor: pointer;
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-weight: 600;
+      color: #0b1020;
+      background: linear-gradient(90deg, var(--primary), var(--primary-2));
+      box-shadow: 0 10px 26px rgba(0,0,0,.35);
+      transition: transform .12s ease, filter .12s ease;
+      min-width: 180px;
+    }
+
+    button:hover{ transform: translateY(-1px); filter: brightness(1.04); }
+    button:active{ transform: translateY(0px); filter: brightness(.98); }
+
+    .req{
+      color: rgba(255,255,255,.75);
+      font-size: 12px;
+      margin-left: 6px;
+    }
+
+    .footer-note{
+      text-align: center;
+      color: rgba(255,255,255,.45);
+      font-size: 12px;
+      margin-top: 6px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="header">
+        <p class="kicker">Demo • Web-to-Lead</p>
+        <h1>Demander une démo Forgeblast</h1>
+        <p class="sub">Laisse tes infos — on te recontacte rapidement.</p>
+      </div>
+
+      <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DJ9000002FKAQ" method="POST">
+        <input type="hidden" name="oid" value="00DJ9000002FKAQ">
+        <input type="hidden" name="retURL" value="https://forgeblast.com/fr">
+
+        <!-- Debug (à activer si besoin)
+        <input type="hidden" name="debug" value="1">
+        <input type="hidden" name="debugEmail" value="clement.richard.mail@gmail.com">
+        -->
+
+        <div class="grid">
+          <div class="field">
+            <label for="first_name">Prénom</label>
+            <input id="first_name" name="first_name" maxlength="40" type="text" placeholder="Ex : Alex" autocomplete="given-name">
+          </div>
+
+          <div class="field">
+            <label for="last_name">Nom <span class="req">requis</span></label>
+            <input id="last_name" name="last_name" maxlength="80" type="text" placeholder="Ex : Martin" autocomplete="family-name" required>
+          </div>
+
+          <div class="field">
+            <label for="email">Adresse e-mail <span class="req">requis</span></label>
+            <input id="email" name="email" maxlength="80" type="email" placeholder="alex@entreprise.com" autocomplete="email" required>
+          </div>
+
+          <div class="field">
+            <label for="phone">Téléphone</label>
+            <input id="phone" name="phone" maxlength="40" type="tel" placeholder="+33 6 00 00 00 00" autocomplete="tel">
+          </div>
+
+          <div class="field">
+            <label for="company">Société <span class="req">requis</span></label>
+            <input id="company" name="company" maxlength="40" type="text" placeholder="Ex : Forgeblast" autocomplete="organization" required>
+          </div>
+
+          <div class="field">
+            <label for="city">Ville</label>
+            <input id="city" name="city" maxlength="40" type="text" placeholder="Ex : Paris" autocomplete="address-level2">
+          </div>
+
+          <div class="field" style="grid-column: 1 / -1;">
+            <label for="state">Région/Province</label>
+            <input id="state" name="state" maxlength="20" type="text" placeholder="Ex : Île-de-France" autocomplete="address-level1">
+          </div>
+        </div>
+
+        <div class="actions">
+          <p class="hint">En soumettant, tu acceptes d’être recontacté pour la démo.</p>
+          <button type="submit" name="submit">Envoyer ma demande</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="footer-note">Formulaire de démo — Web-to-Lead Salesforce</div>
+  </div>
+</body>
+</html>
